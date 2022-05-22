@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>elk</artifactId>
+    <artifactId>spring-elk</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>elk</name>
+    <name>spring-elk</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

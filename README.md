@@ -1,6 +1,6 @@
-# Spring Security
+# ELK Stack
 
-This project is an example of microservice using Spring Boot, Docker, OpenAPI Generator and JWT. It was used Swagger Codegen to generate documentation.
+This project is an example of microservice using ELK Stack. It was based on the [Spring-Security](https://github.com/ricardorqr/spring-security) project.
 
 # Running the application.
 
@@ -9,7 +9,7 @@ This project is an example of microservice using Spring Boot, Docker, OpenAPI Ge
 In the root project folder, run the command:
 
 ```shell
-<elk>$ docker compose up
+<spring-elk>$ docker compose up
 ```
 
 Here is how to check the database
@@ -29,10 +29,6 @@ insert into example.user (id, name, password, username) values (1, "RicoRibeiro"
 
 ### 2. Run application
 
-1. Run the Main class
-
-In each root project folder, run the command:
-
 ```shell
 <elk>$ mvn spring-boot:run
 ```
@@ -41,15 +37,18 @@ In each root project folder, run the command:
 
 ###### Get token
 
-- POST: [http://localhost:8080/login](http://localhost:8080/login)
+- POST: [http://localhost:8081/login](http://localhost:8081/login)
 - Body:
+
 ```json
 {
     "username": "ricoribeiro",
     "password": "ricardo123"
 }
 ```
+
 - Response:
+
 ```json
 {
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNvcmliZWlybyIsInJvbGVzIjpbIkRFViIsIlFBIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MS9sb2dpbiIsImV4cCI6MTY1MzE2NTM3N30.2U4GLTMmkvqyjCvxwBbdfOwf1aIgb_GyzAuJlxvACCk",
@@ -59,6 +58,7 @@ In each root project folder, run the command:
 
 ###### Any other request
 
+Use the given `access_token` in the next request.
 Header:
 ```properties
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNvcmliZWlybyIsInJvbGVzIjpbIkRFViIsIlFBIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MS9sb2dpbiIsImV4cCI6MTY1MzE2NTM3N30.2U4GLTMmkvqyjCvxwBbdfOwf1aIgb_GyzAuJlxvACCk
@@ -77,5 +77,6 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNvcmliZ
 
 # Resources
 
-- https://www.youtube.com/watch?v=VVn9OG9nfH0
+- https://www.youtube.com/watch?v=9g-h1biMn2E
+- https://www.youtube.com/watch?v=5s9pR9UUtAU
 - https://github.com/deviantony/docker-elk

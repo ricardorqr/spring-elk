@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+spring-security:
+  key-word: secret-word-test
+
+spring:
+  application:
+    name: elk
+
+  datasource: # MariaDB
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:33067/example
+    username: root
+    password: example
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+#    show-sql: true
+
+#springdoc:  # Swagger documentation
+#  swagger-ui:
+#    url: /user-api.yml
+#    path: /swagger
+
+logging: # Logbook Logging
+  level:
+    org:
+      zalando:
+        logbook: TRACE

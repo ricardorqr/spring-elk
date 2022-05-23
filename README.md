@@ -79,4 +79,8 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNvcmliZ
 
 - https://www.youtube.com/watch?v=9g-h1biMn2E
 - https://www.youtube.com/watch?v=5s9pR9UUtAU
+- https://github.com/elastic/elasticsearch
 - https://github.com/deviantony/docker-elk
+- https://github.com/buraksarp/docker-elk
+- https://github.com/janitham/spring-boot-elk-stack
+- https://github.com/cassiomolin/log-aggregation-spring-boot-elastic-stack

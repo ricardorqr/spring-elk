@@ -6,7 +6,7 @@ spring-security:
 
 spring:
   application:
-    name: elk
+    name: spring-elk
 
   datasource: # MariaDB
     driver-class-name: org.mariadb.jdbc.Driver

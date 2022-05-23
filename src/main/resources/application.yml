@@ -23,10 +23,10 @@ spring:
       ddl-auto: update
 #    show-sql: true
 
-#springdoc:  # Swagger documentation
-#  swagger-ui:
-#    url: /user-api.yml
-#    path: /swagger
+springdoc:  # Swagger documentation
+  swagger-ui:
+    url: /user-api.yml
+    path: /swagger
 
 logging: # Logbook Logging
   level:

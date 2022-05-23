@@ -1,0 +1,252 @@
+openapi: 3.0.0
+
+info:
+  title: User API Specification
+  description: User API Specification
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: ricardorqr@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1-SNAPSHOT
+
+servers:
+  - url: http://localhost:8081
+
+tags:
+  - name: User
+    description: User operations
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+  - name: Role
+    description: Role operations
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+
+paths:
+
+  /users:
+
+    get:
+      tags:
+        - User
+      summary: Get all users
+      operationId: getUsers
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersAndRolesResponse'
+
+    post:
+      tags:
+        - User
+      summary: Add a user
+      operationId: addUser
+      requestBody:
+        description: Details of the user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+
+  /users/addrole:
+
+    post:
+      tags:
+        - User
+      summary: Add a role to a user
+      operationId: addRoleToUSer
+      requestBody:
+        description: Username and role
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAndRoleRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAndRolesResponse'
+
+  /roles:
+
+    get:
+      tags:
+        - Role
+      summary: Get all roles
+      operationId: getRoles
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesResponse'
+
+    post:
+      tags:
+        - Role
+      summary: Add a role
+      operationId: addRole
+      requestBody:
+        description: Add a new role
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleRequest'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+
+security:
+  - Authorization: []
+
+components:
+  schemas:
+
+    UserDTO:
+      type: object
+      required:
+        - name
+        - username
+        - password
+      properties:
+        name:
+          description: Name of ther user
+          type: string
+          example: Ricardo Ribeiro
+          minLength: 5
+          maxLength: 256
+        username:
+          description: Login of ther user
+          type: string
+          example: ribeirorqr
+          minLength: 5
+          maxLength: 256
+        password:
+          description: Password of ther user
+          type: string
+          example: ricardo123
+          minLength: 5
+          maxLength: 256
+
+    UserResponse:
+      allOf:
+        - $ref: '#/components/schemas/UserDTO'
+
+    UserAndRolesResponse:
+      description: User response
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/UserDTO'
+      properties:
+        roles:
+          type: array
+          description: Roles of the user
+          items:
+            $ref: '#/components/schemas/RoleResponse'
+
+    UsersAndRolesResponse:
+      description: Users response
+      type: object
+      required:
+        - size
+      properties:
+        size:
+          description: Size of the list
+          type: integer
+          example: 2
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserAndRolesResponse'
+
+    UserAndRoleRequest:
+      description: User and role response
+      type: object
+      required:
+        - size
+      properties:
+        username:
+          description: Username of the user
+          type: string
+          example: ricardo123
+          minLength: 5
+          maxLength: 256
+        role:
+          description: Role of the user
+          type: string
+          example: ADMIN
+          minLength: 2
+          maxLength: 20
+
+    UserRequest:
+      description: User request
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/UserDTO'
+
+    RoleDTO:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          description: Name of the role
+          type: string
+          example: ADMIN
+          minLength: 2
+          maxLength: 20
+
+    RoleResponse:
+      allOf:
+        - $ref: '#/components/schemas/RoleDTO'
+
+    RoleRequest:
+      allOf:
+        - $ref: '#/components/schemas/RoleDTO'
+
+    RolesResponse:
+      description: Roles response
+      type: object
+      required:
+        - size
+      properties:
+        size:
+          description: Size of the list
+          type: integer
+          example: 2
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleResponse'
+
+  securitySchemes:
+    Authorization:
+      description: Plese, provide the security token
+      type: apiKey
+      name: Authorization
+      in: header
+

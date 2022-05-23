@@ -51,8 +51,8 @@ services:
   elasticsearch:
     image: elasticsearch:8.2.0
     volumes:
-      - .elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - .elk/elasticsearch:/usr/share/elasticsearch/data
+      - .elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - .elk/elasticsearch:/usr/share/elasticsearch/data:z
     ports:
       - "9200:9200"
 #      - "9300:9300"

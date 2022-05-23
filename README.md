@@ -64,11 +64,6 @@ Header:
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNvcmliZWlybyIsInJvbGVzIjpbIkRFViIsIlFBIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MS9sb2dpbiIsImV4cCI6MTY1MzE2NTM3N30.2U4GLTMmkvqyjCvxwBbdfOwf1aIgb_GyzAuJlxvACCk
 ```
 
-### 4. Kibana
-
-- Login: elastic
-- Password: changeme
-
 # Links
 
 - Kibana: [http://localhost:5601/login?next=%2F](http://localhost:5601/login?next=%2F)
@@ -79,7 +74,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaWNvcmliZ
 
 - https://www.youtube.com/watch?v=9g-h1biMn2E
 - https://www.youtube.com/watch?v=5s9pR9UUtAU
-- https://github.com/elastic/elasticsearch
+- https://github.com/elastic/elasticsearch/tree/master/docs/reference/setup/install/docker
 - https://github.com/deviantony/docker-elk
 - https://github.com/buraksarp/docker-elk
 - https://github.com/janitham/spring-boot-elk-stack

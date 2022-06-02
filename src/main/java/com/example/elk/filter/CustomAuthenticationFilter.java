@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -52,22 +53,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                                             Authentication authentication) throws IOException {
         User user = (User) authentication.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256(secretKeyWord.getBytes());
-        String accessToken = JWT.create()
-                                .withSubject(user.getUsername())
-                                .withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15 min * 1 min * 1000 millisecond
-                                .withIssuer(request.getRequestURL().toString())
-                                .withClaim("roles", user.getAuthorities()
-                                                        .stream()
-                                                        .map(GrantedAuthority::getAuthority)
-                                                        .collect(Collectors.toList()))
-                                .sign(algorithm);
+
+        String accessToken = createToken(request, user, algorithm);
         log.info("Token: {}", accessToken);
 
-        String refreshToken = JWT.create()
-                                 .withSubject(user.getUsername())
-                                 .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000)) // 30 min * 1 min * 1000 millisecond
-                                 .withIssuer(request.getRequestURL().toString())
-                                 .sign(algorithm);
+        String refreshToken = createRefreshToken(request, user, algorithm);
         log.info("Refresh Token: {}", refreshToken);
 
         HashMap<String, String> tokens = new HashMap<>();
@@ -75,6 +65,31 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         tokens.put("refresh_token", refreshToken);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+    }
+
+    private String createToken(HttpServletRequest request, User user, Algorithm algorithm) {
+        return JWT.create()
+                  .withSubject(user.getUsername())
+                  .withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15 min * 1 min * 1000 millisecond
+                  .withIssuer(request.getRequestURL().toString())
+                  .withClaim("roles", getRoles(user))
+                  .sign(algorithm);
+    }
+
+    private String createRefreshToken(HttpServletRequest request, User user, Algorithm algorithm) {
+        return JWT.create()
+                  .withSubject(user.getUsername())
+                  .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000)) // 30 min * 1 min * 1000 millisecond
+                  .withIssuer(request.getRequestURL().toString())
+                  .withClaim("roles", getRoles(user))
+                  .sign(algorithm);
+    }
+
+    private List<String> getRoles(User user) {
+        return user.getAuthorities()
+                   .stream()
+                   .map(GrantedAuthority::getAuthority)
+                   .collect(Collectors.toList());
     }
 
 }

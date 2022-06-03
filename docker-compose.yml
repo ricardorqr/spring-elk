@@ -55,7 +55,7 @@ services:
       - .elk/elasticsearch:/usr/share/elasticsearch/data:z
     ports:
       - "9200:9200"
-#      - "9300:9300"
+      - "9300:9300"
     networks:
       - elk
 

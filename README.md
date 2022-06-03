@@ -21,7 +21,7 @@ Here is how to check the database
 - Database: example
 - Insert user:
 
-```sqlite-sql
+```mysql-sql
 insert into example.user (id, name, password, username) values (1, "RicoRibeiro", "$2a$10$01KY2xuPr8iNq3QokJ1c1OuUNZw6rPmqYQSjAFh91PY.pOnPP0MX2", "ricoribeiro");
 ```
 
